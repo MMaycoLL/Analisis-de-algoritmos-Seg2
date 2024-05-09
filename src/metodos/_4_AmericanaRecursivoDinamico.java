@@ -2,39 +2,21 @@ package metodos;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
-public class _4_AmericanaRecursivoDinamico {
+public class _4_AmericanaRecursivoDinamico implements AlgoritmoMultiplicacion {
 
-    public static void main(String[] args) {
-        ArrayList<BigInteger> arrayList1 = new ArrayList<>();
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
-        arrayList1.add(BigInteger.valueOf(9));
+    @Override
+    public void multiplicar(BigInteger[] arrayList1, BigInteger[] arrayList2) {
+        ArrayList<BigInteger> array1 = new ArrayList<>(arrayList1.length);
+        ArrayList<BigInteger> array2 = new ArrayList<>(arrayList2.length);
 
-        ArrayList<BigInteger> arrayList2 = new ArrayList<>();
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
-        arrayList2.add(BigInteger.valueOf(9));
+        array1.addAll(Arrays.asList(arrayList1));
+        array2.addAll(Arrays.asList(arrayList2));
 
-        System.out.println("Arreglo multiplicando");
-        for(BigInteger l: arrayList1)
-            System.out.print(l + " ");
+        multiplicarArrayListRecursivo(array1, array2);
 
-        System.out.println("\nArreglo multiplicador");
-        for (BigInteger h : arrayList2)
-            System.out.print(h + " ");
-        System.out.println();
-
-        multiplicarArrayListRecursivo(arrayList1, arrayList2);
     }
 
     private static void multiplicarArrayListRecursivo(ArrayList<BigInteger> arrayList1, ArrayList<BigInteger> arrayList2) {
@@ -58,7 +40,6 @@ public class _4_AmericanaRecursivoDinamico {
         }
 
         multiplicacionAmericanoRecursivo(arrayList1, arrayList2, resultado, acarreo, i, j, k);
-        imprimirResultado(resultado);
     }
 
     private static void multiplicacionAmericanoRecursivo(ArrayList<BigInteger> arrayList1, ArrayList<BigInteger> arrayList2, ArrayList<BigInteger> resultado, BigInteger acarreo, int i, int j, int k) {
@@ -74,10 +55,8 @@ public class _4_AmericanaRecursivoDinamico {
             }
             k--;
             resultado.set(k, acarreo);
-            //System.out.println(arr1[j] + "," + arr2[i]);
 
         } else if (j == 0) {
-            //System.out.println(arr1[j] + "," + arr2[i]);
 
             //Está en la posición j=0 e i= cualquier valor del arr1 (For anidado)
             resultado.set(k, resultado.get(k).add(arrayList1.get(j).multiply(arrayList2.get(i))).add(acarreo));
@@ -98,7 +77,6 @@ public class _4_AmericanaRecursivoDinamico {
             k = resultado.size() - (arrayList2.size() - i);
             multiplicacionAmericanoRecursivo(arrayList1,arrayList2,resultado,acarreo,i,j,k);
         } else {
-            //System.out.println(arr1[j] + "," + arr2[i]);
 
             resultado.set(k, resultado.get(k).add(arrayList1.get(j).multiply(arrayList2.get(i))).add(acarreo));
 
@@ -114,12 +92,4 @@ public class _4_AmericanaRecursivoDinamico {
 
         }
     }
-
-    private static void imprimirResultado(ArrayList<BigInteger> resultado) {
-        System.out.println("Resultado");
-        for (int i = 0; i< resultado.size(); i++){
-            System.out.print(resultado.get(i) + " ");
-        }
-    }
-
 }

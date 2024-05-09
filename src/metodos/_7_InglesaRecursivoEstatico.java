@@ -2,33 +2,11 @@ package metodos;
 
 import java.math.BigInteger;
 
-public class _7_InglesaRecursivoEstatico {
-
-    public static void main(String[] args) {
-        BigInteger[] arr1 = {BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9)};
-
-        BigInteger[] arr2 = {BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9),
-                BigInteger.valueOf(9), BigInteger.valueOf(9)};
+public class _7_InglesaRecursivoEstatico implements AlgoritmoMultiplicacion {
 
 
-        System.out.println("Arreglo multiplicando");
-        for(BigInteger l: arr1)
-            System.out.print(l + " ");
-
-        System.out.println("\nArreglo multiplicador");
-        for (BigInteger h : arr2)
-            System.out.print(h + " ");
-        System.out.println();
-
-        multiplicarArreglosInglesRecursivo(arr1, arr2);
-    }
-
-    private static void multiplicarArreglosInglesRecursivo(BigInteger[] arreglo1, BigInteger[] arreglo2) {
+    @Override
+    public void multiplicar(BigInteger[] arreglo1, BigInteger[] arreglo2) {
 
         int tam = arreglo1.length + arreglo2.length;
         BigInteger[] resultado = new BigInteger [tam];
@@ -41,7 +19,6 @@ public class _7_InglesaRecursivoEstatico {
         }
 
         multiplicarRecursivo(arreglo1, arreglo2, resultado, i, j, k);
-        imprimirResultado(resultado);
     }
 
     private static BigInteger[] multiplicarRecursivo(BigInteger[] arreglo1, BigInteger[] arreglo2, BigInteger[] resultado, int i, int j, int k) {
@@ -70,14 +47,6 @@ public class _7_InglesaRecursivoEstatico {
         }
 
         return resultado;
-    }
-
-
-    private static void imprimirResultado(BigInteger[] resultado) {
-        System.out.println("Resultado");
-        for (int i = 0; i < resultado.length; i++) {
-            System.out.print(resultado[i] + " ");
-        }
     }
 
 }

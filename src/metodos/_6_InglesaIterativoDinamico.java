@@ -2,41 +2,21 @@ package metodos;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
-public class _6_InglesaIterativoDinamico {
+public class _6_InglesaIterativoDinamico implements AlgoritmoMultiplicacion {
 
-    public static void main(String[] args){
-        ArrayList<BigInteger> arr1 = new ArrayList<>();
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
-        arr1.add(BigInteger.valueOf(9));
+    @Override
+    public void multiplicar(BigInteger[] arr1, BigInteger[] arr2) {
+        // Convertir los arrays a ArrayList
+        ArrayList<BigInteger> arrayList1 = new ArrayList<>(arr1.length);
+        ArrayList<BigInteger> arrayList2 = new ArrayList<>(arr2.length);
+        arrayList1.addAll(Arrays.asList(arr1));
+        arrayList2.addAll(Arrays.asList(arr2));
 
-        ArrayList<BigInteger> arr2 = new ArrayList<>();
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-        arr2.add(BigInteger.valueOf(9));
-
-
-        System.out.println("Arreglo multiplicando");
-        for(BigInteger l: arr1)
-            System.out.print(l + " ");
-
-        System.out.println("\nArreglo multiplicador");
-        for (BigInteger h : arr2)
-            System.out.print(h + " ");
-        System.out.println();
-
-        multiplicarInglesArrayList(arr1, arr2);
-
+        // Llamar al método existente con ArrayList
+        multiplicarInglesArrayList(arrayList1, arrayList2);
     }
 
     public static void multiplicarInglesArrayList (ArrayList<BigInteger> arrayList1, ArrayList<BigInteger> arrayList2) {
@@ -59,16 +39,6 @@ public class _6_InglesaIterativoDinamico {
             resultado.set(k - 1, resultado.get(k - 1).add(resultado.get(k).divide(BigInteger.TEN)));
             resultado.set(k, resultado.get(k).mod(BigInteger.TEN));
 
-        }
-
-        imprimirResultadoArrayList(resultado);
-
-    }
-
-    private static void imprimirResultadoArrayList(ArrayList<BigInteger> resultado) {
-        System.out.println("Resultado");
-        for (int i = 0; i< resultado.size(); i++){
-            System.out.print(resultado.get(i) + " ");
         }
     }
 }

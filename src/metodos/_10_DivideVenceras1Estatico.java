@@ -37,7 +37,6 @@ public class _10_DivideVenceras1Estatico {
     }
 
 
-    //ARREGLOS EJEMPLO VEC1[2,4,1,3] VEC2[1,3,2,1]
     //método de llamado dv1
     public static int[] divideyVenceras1(int vec1[],int vec2[],int n) {
 
@@ -84,7 +83,6 @@ public class _10_DivideVenceras1Estatico {
             }
 
             // Resultado parcial de la parte izquierda (izquierda_derecha)
-            //[0, 2, 3, 6]
             int[] t=new int[(n/2)+n];
             int[] auxt=new int[n];
             iniceros(t,(n/2)+n);
@@ -105,19 +103,16 @@ public class _10_DivideVenceras1Estatico {
             res=suma(r,2*n,s,n+(n/2));
 
             //Combinación de izquierda_derecha y derecha_derecha:
-            //System.out.println("res1: "+Arrays.toString(res));
             int[] res2=new int[(n/2)+n];
             iniceros(res2,(n/2)+n);
             res2=suma(t,n+(n/2),u,n);
 
 
-            //System.out.println("res2: "+Arrays.toString(res2));
             int[] res3=new int[2*n];
             iniceros(res3,2*n);
 
             //Combinación de los resultados anteriores:
             res3=suma(res,2*n,res2,(n/2)+n);
-            //System.out.println("res3: "+Arrays.toString(res3));
 
             //el resultado final se almacena en el arreglo res3 y se devuelve al final de la función divideyVenceras1
             return res3;
@@ -216,5 +211,4 @@ public class _10_DivideVenceras1Estatico {
 
         return new BigInteger(stringBuilder.toString());
     }
-
 }

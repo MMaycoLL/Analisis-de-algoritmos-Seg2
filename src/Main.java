@@ -1,5 +1,4 @@
-package metodos;
-
+import metodos.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -17,7 +16,7 @@ public class Main extends JFrame {
         super("Tiempos de Ejecución");
 
         // Arreglo que contendrá todos los tiempos de ejecución y nombres de algoritmos
-        metodos.AlgoritmoTiempo[] arregloDeTiempos = new metodos.AlgoritmoTiempo[2];
+        metodos.AlgoritmoTiempo[] arregloDeTiempos = new metodos.AlgoritmoTiempo[9];
 
         // Ejecutar y medir el tiempo de ejecución de cada algoritmo
         AlgoritmoMultiplicacion algoritmo1 = new _1_AmericanaIterativoEstatico();
@@ -27,6 +26,39 @@ public class Main extends JFrame {
         AlgoritmoMultiplicacion algoritmo2 = new _2_AmericanaIterativoDinamico();
         double tiempoAlgoritmo2 = medirTiempo(algoritmo2, arreglo1, arreglo2);
         arregloDeTiempos[1] = new metodos.AlgoritmoTiempo("AmericanaIterativoDinamico", tiempoAlgoritmo2);
+
+        AlgoritmoMultiplicacion algoritmo3 = new _3_AmericanaRecursivoEstatico();
+        double tiempoAlgoritmo3 = medirTiempo(algoritmo3, arreglo1, arreglo2);
+        arregloDeTiempos[2] = new metodos.AlgoritmoTiempo("AmericanaRecursivoEstatico", tiempoAlgoritmo3);
+
+        AlgoritmoMultiplicacion algoritmo4 = new _4_AmericanaRecursivoDinamico();
+        double tiempoAlgoritmo4 = medirTiempo(algoritmo4, arreglo1, arreglo2);
+        arregloDeTiempos[3] = new metodos.AlgoritmoTiempo("AmericanaRecursivoDinamico", tiempoAlgoritmo4);
+
+        AlgoritmoMultiplicacion algoritmo5 = new _5_InglesaIterativoEstatico();
+        double tiempoAlgoritmo5 = medirTiempo(algoritmo5, arreglo1, arreglo2);
+        arregloDeTiempos[4] = new metodos.AlgoritmoTiempo("InglesaIterativoEstatico", tiempoAlgoritmo5);
+
+        AlgoritmoMultiplicacion algoritmo6 = new _6_InglesaIterativoDinamico();
+        double tiempoAlgoritmo6 = medirTiempo(algoritmo6, arreglo1, arreglo2);
+        arregloDeTiempos[5] = new metodos.AlgoritmoTiempo("InglesaIterativoDinamico", tiempoAlgoritmo6);
+
+        AlgoritmoMultiplicacion algoritmo7 = new _7_InglesaRecursivoEstatico();
+        double tiempoAlgoritmo7 = medirTiempo(algoritmo7, arreglo1, arreglo2);
+        arregloDeTiempos[6] = new metodos.AlgoritmoTiempo("InglesaRecursivoEstatico", tiempoAlgoritmo7);
+
+        AlgoritmoMultiplicacion algoritmo8 = new _8_InglesaRecursivoDinamico();
+        double tiempoAlgoritmo8 = medirTiempo(algoritmo8, arreglo1, arreglo2);
+        arregloDeTiempos[7] = new metodos.AlgoritmoTiempo("InglesaRecursivoDinamico", tiempoAlgoritmo8);
+
+        AlgoritmoMultiplicacion algoritmo9 = new _9_HinduIterativoEstatico();
+        double tiempoAlgoritmo9 = medirTiempo(algoritmo9, arreglo1, arreglo2);
+        arregloDeTiempos[8] = new metodos.AlgoritmoTiempo("HinduIterativoEstatico", tiempoAlgoritmo9);
+
+
+
+
+
 
         // Ordenar el arreglo de tiempos y nombres de algoritmos
         Arrays.sort(arregloDeTiempos);
@@ -44,7 +76,7 @@ public class Main extends JFrame {
 
         // Crear el gráfico
         JFreeChart chart = ChartFactory.createBarChart("Comparación de Tiempos de Ejecución", // Título del gráfico
-                "Algoritmo", // Etiqueta del eje de las X
+                "Algoritmos", // Etiqueta del eje de las X
                 "Tiempo de Ejecución (ms)", // Etiqueta del eje de las Y
                 dataset // Datos
         );
