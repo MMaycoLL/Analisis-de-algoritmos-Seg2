@@ -7,13 +7,11 @@ import java.util.Random;
 public class _9_HinduIterativoEstatico {
 
     public static void main(String[] args){
-        //BigInteger[] arr1 = generateRandomBigIntegerArray(9);
         BigInteger[] arr1 = {BigInteger.valueOf(9),
                 BigInteger.valueOf(9), BigInteger.valueOf(9),
                 BigInteger.valueOf(9), BigInteger.valueOf(9),
                 BigInteger.valueOf(9), BigInteger.valueOf(9)};
 
-        //BigInteger[] arr2 = generateRandomBigIntegerArray(9);
         BigInteger[] arr2 = {BigInteger.valueOf(9),
                 BigInteger.valueOf(9), BigInteger.valueOf(9),
                 BigInteger.valueOf(9), BigInteger.valueOf(9),

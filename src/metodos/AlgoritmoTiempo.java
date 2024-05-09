@@ -1,4 +1,4 @@
-package seguimiento;
+package metodos;
 
 
 public class AlgoritmoTiempo implements Comparable<AlgoritmoTiempo> {
