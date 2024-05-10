@@ -5,35 +5,38 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main extends JFrame {
 
-    private static final long serialVersionUID = 1L;
+    private static final String FILE_PATH1 = "src/generador/datos_generados1.txt";
+    private static final String FILE_PATH2 = "src/generador/datos_generados2.txt";
 
     public Main(BigInteger[] arreglo1, BigInteger[] arreglo2) {
         super("Tiempos de Ejecución");
 
         // Arreglo que contendrá todos los tiempos de ejecución y nombres de algoritmos
-        metodos.AlgoritmoTiempo[] arregloDeTiempos = new metodos.AlgoritmoTiempo[9];
+        AlgoritmoTiempo[] arregloDeTiempos = new AlgoritmoTiempo[10];
 
         // Ejecutar y medir el tiempo de ejecución de cada algoritmo
         AlgoritmoMultiplicacion algoritmo1 = new _1_AmericanaIterativoEstatico();
         double tiempoAlgoritmo1 = medirTiempo(algoritmo1, arreglo1, arreglo2);
-        arregloDeTiempos[0] = new metodos.AlgoritmoTiempo("AmericanaIterativoEstatico", tiempoAlgoritmo1);
+        arregloDeTiempos[0] = new metodos.AlgoritmoTiempo("AIEstatico", tiempoAlgoritmo1);
 
         AlgoritmoMultiplicacion algoritmo2 = new _2_AmericanaIterativoDinamico();
         double tiempoAlgoritmo2 = medirTiempo(algoritmo2, arreglo1, arreglo2);
-        arregloDeTiempos[1] = new metodos.AlgoritmoTiempo("AmericanaIterativoDinamico", tiempoAlgoritmo2);
+        arregloDeTiempos[1] = new metodos.AlgoritmoTiempo("AIDinamico", tiempoAlgoritmo2);
 
         AlgoritmoMultiplicacion algoritmo3 = new _3_AmericanaRecursivoEstatico();
         double tiempoAlgoritmo3 = medirTiempo(algoritmo3, arreglo1, arreglo2);
-        arregloDeTiempos[2] = new metodos.AlgoritmoTiempo("AmericanaRecursivoEstatico", tiempoAlgoritmo3);
+        arregloDeTiempos[2] = new metodos.AlgoritmoTiempo("AREstatico", tiempoAlgoritmo3);
 
         AlgoritmoMultiplicacion algoritmo4 = new _4_AmericanaRecursivoDinamico();
         double tiempoAlgoritmo4 = medirTiempo(algoritmo4, arreglo1, arreglo2);
-        arregloDeTiempos[3] = new metodos.AlgoritmoTiempo("AmericanaRecursivoDinamico", tiempoAlgoritmo4);
+        arregloDeTiempos[3] = new metodos.AlgoritmoTiempo("ARDinamico", tiempoAlgoritmo4);
 
         AlgoritmoMultiplicacion algoritmo5 = new _5_InglesaIterativoEstatico();
         double tiempoAlgoritmo5 = medirTiempo(algoritmo5, arreglo1, arreglo2);
@@ -55,13 +58,15 @@ public class Main extends JFrame {
         double tiempoAlgoritmo9 = medirTiempo(algoritmo9, arreglo1, arreglo2);
         arregloDeTiempos[8] = new metodos.AlgoritmoTiempo("HinduIterativoEstatico", tiempoAlgoritmo9);
 
-
-
-
+        AlgoritmoMultiplicacion algoritmo10 = new _10_DivideVenceras1Estatico();
+        double tiempoAlgoritmo10 = medirTiempo(algoritmo10, arreglo1, arreglo2);
+        arregloDeTiempos[9] = new metodos.AlgoritmoTiempo("HinduIterativoEstatico", tiempoAlgoritmo10);
 
 
         // Ordenar el arreglo de tiempos y nombres de algoritmos
-        Arrays.sort(arregloDeTiempos);
+        Arrays.sort(arregloDeTiempos, Comparator.comparing(AlgoritmoTiempo::getTiempo));
+
+        guardarTiemposEnArchivo(arregloDeTiempos, "src/generador/datos_generados3.txt");
 
         // Imprimir los tiempos de ejecución
         for (metodos.AlgoritmoTiempo algoritmoTiempo : arregloDeTiempos) {
@@ -88,8 +93,14 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         // Definir los arreglos de ejemplo
-        BigInteger[] arreglo1 = {BigInteger.valueOf(123), BigInteger.valueOf(456), BigInteger.valueOf(789)};
-        BigInteger[] arreglo2 = {BigInteger.valueOf(321), BigInteger.valueOf(654), BigInteger.valueOf(987)};
+        int[] arreglo11 = readNumbersFromFile(FILE_PATH1);
+        int[] arreglo22 = readNumbersFromFile(FILE_PATH2);
+
+        // Convertir los arreglos de enteros a BigInteger[]
+        BigInteger[] arreglo1 = convertirABigInteger(arreglo11);
+        BigInteger[] arreglo2 = convertirABigInteger(arreglo22);
+
+
 
         Main main = new Main(arreglo1, arreglo2);
         main.pack();
@@ -101,6 +112,35 @@ public class Main extends JFrame {
         algoritmo.multiplicar(arreglo1, arreglo2);
         long endTime = System.nanoTime();
         return (double) (endTime - startTime) / 1000000; // Convertir de nanosegundos a milisegundos
+    }
+
+    private static int[] readNumbersFromFile(String fileName) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            return br.lines().mapToInt(Integer::parseInt).toArray();
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            return new int[0];
+        }
+    }
+
+    private static BigInteger[] convertirABigInteger(int[] datos) {
+        BigInteger[] result = new BigInteger[datos.length];
+        for (int i = 0; i < datos.length; i++) {
+            result[i] = BigInteger.valueOf(datos[i]);
+        }
+        return result;
+    }
+
+    private static void guardarTiemposEnArchivo(AlgoritmoTiempo[] tiempos, String nombreArchivo) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (metodos.AlgoritmoTiempo tiempo : tiempos) {
+                bw.write(tiempo.getNombre() + ": " + tiempo.getTiempo() + " ms");
+                bw.newLine(); // Agregar una nueva línea para cada tiempo
+            }
+            System.out.println("Tiempos de ejecución guardados en el archivo '" + nombreArchivo + "'.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

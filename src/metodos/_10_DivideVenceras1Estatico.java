@@ -1,41 +1,23 @@
 package metodos;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
-public class _10_DivideVenceras1Estatico {
-    public static void main(String[] args){
+public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
 
-        //16x16
-        BigInteger n3 = new BigInteger("9384938384738374");
-        BigInteger num3 = new BigInteger("4321245679876543");
+    @Override
+    public void multiplicar(BigInteger[] arr1, BigInteger[] arr2) {
+        // Convertir BigInteger[] a int[]
+        int[] intArr1 = convertBigIntegerArrayToIntArray(arr1);
+        int[] intArr2 = convertBigIntegerArrayToIntArray(arr2);
 
+        // Llamar a divideyVenceras1 con los arreglos enteros
+        int[] resultIntArray = divideyVenceras1(intArr1, intArr2, 2);
 
-        List<BigInteger> lista1 = new ArrayList<>();
+        // Convertir el resultado de int[] a BigInteger
+        convertIntArrayToBigInteger(resultIntArray);
 
-        lista1.add(n3);
-
-
-        List<BigInteger> lista2 = new ArrayList<>();
-
-        lista2.add(num3);
-      
-        for(int i=0; i<8; i++){
-            System.out.println("----------");
-            int[] arr1 = convertBigIntegerToArray(lista1.get(i));
-            int [] arr2 = convertBigIntegerToArray(lista2.get(i));
-            System.out.println(arr1.length+" X "+arr2.length);
-
-            double startTime = System.nanoTime();
-            BigInteger result = convertArrayToBigInteger(divideyVenceras1(arr1, arr2, arr1.length));
-            double endTime = System.nanoTime();
-            System.out.println("Tiempo: "+(endTime-startTime)/100_000);
-            System.out.println("Resultado: "+result);
-        }
     }
-
 
     //método de llamado dv1
     public static int[] divideyVenceras1(int vec1[],int vec2[],int n) {
@@ -59,7 +41,6 @@ public class _10_DivideVenceras1Estatico {
             }
 
             //estos reciben los resultados parciales de la parte izquierda
-            //[0, 3, 1, 2]
             int[] r=new int[2*n];
             int[] auxr = new int[n];
             iniceros(r,2*n);
@@ -71,7 +52,6 @@ public class _10_DivideVenceras1Estatico {
             }
 
             //estos reciben los resultados parciales de la parte derecha(derecha_izquierda)
-            //[0, 0, 2, 6]
             int[] s = new int[n+(n/2)];
             int[] auxs = new int[n+(n/2)];
             iniceros(s,n+(n/2));
@@ -190,25 +170,23 @@ public class _10_DivideVenceras1Estatico {
         return res;
     }
 
-
-    public static int[] convertBigIntegerToArray(BigInteger number) {
-        String numberString = number.toString();
-        int[] array = new int[numberString.length()];
-
-        for (int i = 0; i < numberString.length(); i++) {
-            array[i] = Character.getNumericValue(numberString.charAt(i));
+    // Método para convertir BigInteger[] a int[]
+    private int[] convertBigIntegerArrayToIntArray(BigInteger[] bigIntArray) {
+        int[] intArray = new int[bigIntArray.length];
+        for (int i = 0; i < bigIntArray.length; i++) {
+            intArray[i] = bigIntArray[i].intValue();
         }
-
-        return array;
+        return intArray;
     }
 
-    public static BigInteger convertArrayToBigInteger(int[] array) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < array.length; i++) {
-            stringBuilder.append(array[i]);
+    // Método para convertir int[] a BigInteger
+    private BigInteger convertIntArrayToBigInteger(int[] intArray) {
+        StringBuilder sb = new StringBuilder();
+        for (int value : intArray) {
+            sb.append(value);
         }
-
-        return new BigInteger(stringBuilder.toString());
+        // Utiliza el constructor de BigInteger que toma una cadena como argumento
+        return new BigInteger(sb.toString());
     }
+
 }

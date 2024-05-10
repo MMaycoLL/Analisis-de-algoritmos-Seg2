@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 
 public class GeneradorDatos {
 
-    private static final int LONGITUD_ARREGLO = 10; // Longitud del arreglo
+    private static final int LONGITUD_ARREGLO = 1; // Longitud del arreglo
 
     private static void guardarDatosEnArchivo(int[] datos, String nombreArchivo) throws IOException {
         StringJoiner joiner = new StringJoiner("\n");
@@ -24,7 +24,7 @@ public class GeneradorDatos {
 
     private static int generarNumeroAleatorioDeOchoDigitos() {
         Random rand = new Random();
-        return rand.nextInt(90000000) + 10000000; // Genera un número aleatorio de 8 dígitos
+        return rand.nextInt(800000) + 100000; // Genera un número aleatorio de 8 dígitos
     }
 
     public static int[] generarArregloAleatorio() {
@@ -38,10 +38,11 @@ public class GeneradorDatos {
     public static void main(String[] args) {
         try {
             // Generar arreglo con 100,000 valores aleatorios de 8 dígitos
-            int[] datosAleatorios = generarArregloAleatorio();
-
+            int[] datosAleatorios1 = generarArregloAleatorio();
+            int[] datosAleatorios2 = generarArregloAleatorio();
             // Guardar los datos en un archivo de texto
-            guardarDatosEnArchivo(datosAleatorios, "D:\\Code\\seguimiento2\\src\\generador\\datos_generados_8.txt");
+            guardarDatosEnArchivo(datosAleatorios1, "src/generador/datos_generados1.txt");
+            guardarDatosEnArchivo(datosAleatorios2, "src/generador/datos_generados2.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
