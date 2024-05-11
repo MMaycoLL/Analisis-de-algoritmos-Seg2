@@ -12,7 +12,7 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
         int[] intArr2 = convertBigIntegerArrayToIntArray(arr2);
 
         // Llamar a divideyVenceras1 con los arreglos enteros
-        int[] resultIntArray = divideyVenceras1(intArr1, intArr2, 2);
+        int[] resultIntArray = divideyVenceras1(intArr1, intArr2, intArr1.length);
 
         // Convertir el resultado de int[] a BigInteger
         convertIntArrayToBigInteger(resultIntArray);

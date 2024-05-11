@@ -41,7 +41,6 @@ public class _9_HinduIterativoEstatico implements AlgoritmoMultiplicacion {
         }
         for (int i = resultado.length - 1; i>=0; i--){
             resultado[i] = resultado[i].add(acarreo[i]);
-            //resultado[i] += acarreo[i];
 
             if (i - 1 >= 0) {
                 if (resultado[i].compareTo(BigInteger.TEN) >= 0) {

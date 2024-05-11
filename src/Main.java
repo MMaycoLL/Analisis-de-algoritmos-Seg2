@@ -7,8 +7,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.*;
 import java.io.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class Main extends JFrame {
 
@@ -60,7 +62,8 @@ public class Main extends JFrame {
 
         AlgoritmoMultiplicacion algoritmo10 = new _10_DivideVenceras1Estatico();
         double tiempoAlgoritmo10 = medirTiempo(algoritmo10, arreglo1, arreglo2);
-        arregloDeTiempos[9] = new metodos.AlgoritmoTiempo("HinduIterativoEstatico", tiempoAlgoritmo10);
+        arregloDeTiempos[9] = new metodos.AlgoritmoTiempo("DivideVenceras1Estatico", tiempoAlgoritmo10);
+
 
 
         // Ordenar el arreglo de tiempos y nombres de algoritmos
@@ -93,16 +96,14 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         // Definir los arreglos de ejemplo
-        int[] arreglo11 = readNumbersFromFile(FILE_PATH1);
-        int[] arreglo22 = readNumbersFromFile(FILE_PATH2);
-
-        // Convertir los arreglos de enteros a BigInteger[]
-        BigInteger[] arreglo1 = convertirABigInteger(arreglo11);
-        BigInteger[] arreglo2 = convertirABigInteger(arreglo22);
+        BigInteger[] arreglo11 = readNumbersFromFile(FILE_PATH1);
+        BigInteger[] arreglo22 = readNumbersFromFile(FILE_PATH2);
 
 
 
-        Main main = new Main(arreglo1, arreglo2);
+
+
+        Main main = new Main(arreglo11, arreglo22);
         main.pack();
         main.setVisible(true);
     }
@@ -114,22 +115,25 @@ public class Main extends JFrame {
         return (double) (endTime - startTime) / 1000000; // Convertir de nanosegundos a milisegundos
     }
 
-    private static int[] readNumbersFromFile(String fileName) {
+    private static BigInteger[] readNumbersFromFile(String fileName) {
+        List<BigInteger> numbers = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            return br.lines().mapToInt(Integer::parseInt).toArray();
+            String line;
+            while ((line = br.readLine()) != null) {
+                try {
+                    BigInteger number = new BigInteger(line.trim()); // Convierte la línea a BigInteger
+                    numbers.add(number);
+                } catch (NumberFormatException e) {
+                    System.err.println("Error parsing line: " + line + ". Skipping...");
+                }
+            }
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
-            return new int[0];
         }
+        return numbers.toArray(new BigInteger[0]);
     }
 
-    private static BigInteger[] convertirABigInteger(int[] datos) {
-        BigInteger[] result = new BigInteger[datos.length];
-        for (int i = 0; i < datos.length; i++) {
-            result[i] = BigInteger.valueOf(datos[i]);
-        }
-        return result;
-    }
+
 
     private static void guardarTiemposEnArchivo(AlgoritmoTiempo[] tiempos, String nombreArchivo) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
