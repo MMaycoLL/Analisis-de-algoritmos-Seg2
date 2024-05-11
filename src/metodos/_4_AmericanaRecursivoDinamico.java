@@ -69,7 +69,7 @@ public class _4_AmericanaRecursivoDinamico implements AlgoritmoMultiplicacion {
             }
             k--;
 
-            //Termina el segundo for e itera el arr2 (primer for)
+
             resultado.set(k, acarreo);
             acarreo = BigInteger.ZERO;
             i--;

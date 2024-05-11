@@ -7,7 +7,7 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
     @Override
     public void multiplicar(BigInteger[] arr1, BigInteger[] arr2) {
-        // Convertir BigInteger[] a int[]
+
         int[] intArr1 = convertBigIntegerArrayToIntArray(arr1);
         int[] intArr2 = convertBigIntegerArrayToIntArray(arr2);
 
@@ -19,11 +19,11 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
     }
 
-    //método de llamado dv1
+    //método de llamado divideyVenceras1
     public static int[] divideyVenceras1(int vec1[],int vec2[],int n) {
 
         if(n==2) {//caso base
-            int[] resultado = new int[n+1];
+            int[] resultado;
             resultado = AlgoritmoTradicional(vec1,vec2);
             return resultado;
         }
@@ -42,7 +42,7 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
             //estos reciben los resultados parciales de la parte izquierda
             int[] r=new int[2*n];
-            int[] auxr = new int[n];
+            int[] auxr;
             iniceros(r,2*n);
             auxr=divideyVenceras1(w,y,n/2);//
 
@@ -53,7 +53,7 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
             //estos reciben los resultados parciales de la parte derecha(derecha_izquierda)
             int[] s = new int[n+(n/2)];
-            int[] auxs = new int[n+(n/2)];
+            int[] auxs;
             iniceros(s,n+(n/2));
             auxs=divideyVenceras1(w,z,n/2);
 
@@ -64,7 +64,7 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
             // Resultado parcial de la parte izquierda (izquierda_derecha)
             int[] t=new int[(n/2)+n];
-            int[] auxt=new int[n];
+            int[] auxt;
             iniceros(t,(n/2)+n);
             auxt=divideyVenceras1(x,y,n/2);
 

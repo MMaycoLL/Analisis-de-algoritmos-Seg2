@@ -5,9 +5,7 @@ import java.math.BigInteger;
 public class _3_AmericanaRecursivoEstatico implements AlgoritmoMultiplicacion {
 
 
-    //Este método evita que en la ejecución se desborde
-    //Si el valor que hay en el arreglo 1 es mayor al valor del arreglo 2 entonces se intercambian
-    //Es utilizado en el método recursivo
+
     @Override
     public void multiplicar(BigInteger[] arr1, BigInteger[] arr2) {
 
