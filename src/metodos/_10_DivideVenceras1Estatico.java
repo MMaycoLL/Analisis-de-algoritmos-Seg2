@@ -19,85 +19,84 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
 
     }
 
-    //método de llamado divideyVenceras1
-    public static int[] divideyVenceras1(int vec1[],int vec2[],int n) {
+    // Este método implementa el algoritmo de multiplicación utilizando el enfoque de divide y vencerás.
+// Divide recursivamente los arreglos de entrada en subarreglos más pequeños y luego combina los resultados parciales.
+    public static int[] divideyVenceras1(int vec1[], int vec2[], int n) {
 
-        if(n==2) {//caso base
+        // Si el tamaño del problema es lo suficientemente pequeño (n=2), utiliza el algoritmo tradicional.
+        if (n == 2) {
             int[] resultado;
-            resultado = AlgoritmoTradicional(vec1,vec2);
+            resultado = AlgoritmoTradicional(vec1, vec2); // Llama al algoritmo tradicional.
             return resultado;
-        }
-        else {//crea 4 arreglosunidimensionales tamaño n/2
-            int[] x=new int[n/2];
-            int[] y=new int[n/2];
-            int[] z=new int[n/2];
-            int[] w=new int[n/2];
+        } else {
+            // Divide los arreglos de entrada en cuatro subarreglos de tamaño n/2.
+            int[] x = new int[n / 2];
+            int[] y = new int[n / 2];
+            int[] z = new int[n / 2];
+            int[] w = new int[n / 2];
 
-            for(int i=0;i<n/2;i++) {
-                w[i]=vec1[i];//recibe la izquierda del multiplicador[2,4]
-                y[i]=vec2[i];//recibe la izquierda del multiplicando[1,3]
-                x[i]=vec1[i+(n/2)];//recibe la derecha del multiplicador[1,3]
-                z[i]=vec2[i+(n/2)];//recibe la derecha del multiplicando[2,1]
+            // Asigna los elementos de los arreglos originales a los subarreglos.
+            for (int i = 0; i < n / 2; i++) {
+                w[i] = vec1[i]; // Asigna la parte izquierda del multiplicador.
+                y[i] = vec2[i]; // Asigna la parte izquierda del multiplicando.
+                x[i] = vec1[i + (n / 2)]; // Asigna la parte derecha del multiplicador.
+                z[i] = vec2[i + (n / 2)]; // Asigna la parte derecha del multiplicando.
             }
 
-            //estos reciben los resultados parciales de la parte izquierda
-            int[] r=new int[2*n];
+            // Calcula los resultados parciales de la parte izquierda del arreglo.
+            int[] r = new int[2 * n];
             int[] auxr;
-            iniceros(r,2*n);
-            auxr=divideyVenceras1(w,y,n/2);//
+            iniceros(r, 2 * n); // Inicializa con ceros.
+            auxr = divideyVenceras1(w, y, n / 2); // Llama recursivamente.
 
-            for(int i=0;i<n;i++)
-            {
-                r[i]=auxr[i];
+            // Asigna los resultados parciales al arreglo r.
+            for (int i = 0; i < n; i++) {
+                r[i] = auxr[i];
             }
 
-            //estos reciben los resultados parciales de la parte derecha(derecha_izquierda)
-            int[] s = new int[n+(n/2)];
+            // Calcula los resultados parciales de la parte derecha izquierda del arreglo.
+            int[] s = new int[n + (n / 2)];
             int[] auxs;
-            iniceros(s,n+(n/2));
-            auxs=divideyVenceras1(w,z,n/2);
+            iniceros(s, n + (n / 2)); // Inicializa con ceros.
+            auxs = divideyVenceras1(w, z, n / 2); // Llama recursivamente.
 
-            for(int i=0;i<n;i++)
-            {
-                s[i]=auxs[i];
+            // Asigna los resultados parciales al arreglo s.
+            for (int i = 0; i < n; i++) {
+                s[i] = auxs[i];
             }
 
-            // Resultado parcial de la parte izquierda (izquierda_derecha)
-            int[] t=new int[(n/2)+n];
+            // Calcula los resultados parciales de la parte izquierda derecha del arreglo.
+            int[] t = new int[(n / 2) + n];
             int[] auxt;
-            iniceros(t,(n/2)+n);
-            auxt=divideyVenceras1(x,y,n/2);
+            iniceros(t, (n / 2) + n); // Inicializa con ceros.
+            auxt = divideyVenceras1(x, y, n / 2); // Llama recursivamente.
 
-            for(int i=0;i<n;i++) {
-                t[i]=auxt[i];
+            // Asigna los resultados parciales al arreglo t.
+            for (int i = 0; i < n; i++) {
+                t[i] = auxt[i];
             }
 
-            // Resultado parcial de la parte derecha (derecha_derecha)
-            int[] u=new int[n];
-            iniceros(u,n);
-            u=divideyVenceras1(x,z,n/2);
+            // Calcula los resultados parciales de la parte derecha derecha del arreglo.
+            int[] u = new int[n];
+            iniceros(u, n); // Inicializa con ceros.
+            u = divideyVenceras1(x, z, n / 2); // Llama recursivamente.
 
-            //Combinación de izquierda_izquierda y derecha_izquierda
-            int[] res=new int[2*n];
-            iniceros(res,2*n);
-            res=suma(r,2*n,s,n+(n/2));
+            // Combina los resultados parciales en un solo arreglo.
+            int[] res = new int[2 * n];
+            iniceros(res, 2 * n); // Inicializa con ceros.
+            res = suma(r, 2 * n, s, n + (n / 2)); // Combinación de izquierda_izquierda y derecha_izquierda.
+            int[] res2 = new int[(n / 2) + n];
+            iniceros(res2, (n / 2) + n); // Inicializa con ceros.
+            res2 = suma(t, n + (n / 2), u, n); // Combinación de izquierda_derecha y derecha_derecha.
+            int[] res3 = new int[2 * n];
+            iniceros(res3, 2 * n); // Inicializa con ceros.
+            res3 = suma(res, 2 * n, res2, (n / 2) + n); // Combinación de los resultados anteriores.
 
-            //Combinación de izquierda_derecha y derecha_derecha:
-            int[] res2=new int[(n/2)+n];
-            iniceros(res2,(n/2)+n);
-            res2=suma(t,n+(n/2),u,n);
-
-
-            int[] res3=new int[2*n];
-            iniceros(res3,2*n);
-
-            //Combinación de los resultados anteriores:
-            res3=suma(res,2*n,res2,(n/2)+n);
-
-            //el resultado final se almacena en el arreglo res3 y se devuelve al final de la función divideyVenceras1
+            // Devuelve el resultado final.
             return res3;
         }
     }
+
 
     //completa de ceros los arreglos hasta la potencia de 2 más cercana
     static void iniceros(int arreglo[],int tamano)
@@ -108,34 +107,37 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
         }
     }
 
-    //método para caso base
-    public static int[] AlgoritmoTradicional (int arreglo1[], int arreglo2[]) {
-        int resultado[]= new int [arreglo1.length+ arreglo2.length];
-        int k;
-        int acarreo = 0;
+    // Este método implementa el algoritmo de multiplicación tradicional para el caso base.
+// Recibe dos arreglos de enteros y devuelve un arreglo que contiene el resultado de la multiplicación.
+    public static int[] AlgoritmoTradicional(int arreglo1[], int arreglo2[]) {
+        // Calcula el tamaño del resultado sumando las longitudes de los dos arreglos.
+        int resultado[] = new int[arreglo1.length + arreglo2.length];
+        int k; // Índice para controlar la posición en el arreglo resultado.
+        int acarreo = 0; // Almacena el acarreo durante las multiplicaciones.
 
-        for (int i = arreglo2.length -1; i>=0; i--){
-
-            //Verifica a qué tan lejos está del borde derecho del arreglo resultado
-            k  = resultado.length - (arreglo2.length - i);
-            //Recorre el arreglo multiplicando desde la última posición
+        // Recorre el segundo arreglo de derecha a izquierda.
+        for (int i = arreglo2.length - 1; i >= 0; i--) {
+            // Calcula la posición inicial en el arreglo resultado.
+            k = resultado.length - (arreglo2.length - i);
+            // Recorre el primer arreglo de derecha a izquierda.
             for (int j = arreglo1.length - 1; j >= 0; j--) {
-
-                //Realiza la multiplicación y suma sobre el resultado anterior
-                resultado[k] += arreglo1[j] * arreglo2[i] + acarreo ;
+                // Realiza la multiplicación y suma el acarreo.
+                resultado[k] += arreglo1[j] * arreglo2[i] + acarreo;
+                // Verifica si hay acarreo y ajusta el resultado y el acarreo.
                 if (resultado[k] >= 10) {
-                    acarreo = resultado[k]/10;
-                    resultado[k] = resultado[k]%10;
+                    acarreo = resultado[k] / 10;
+                    resultado[k] = resultado[k] % 10;
                 } else {
                     acarreo = 0;
                 }
-
-                k--;
+                k--; // Mueve el índice al siguiente elemento del arreglo resultado.
             }
-            resultado[k]=acarreo;
+            // Asigna el acarreo restante a la posición final del resultado.
+            resultado[k] = acarreo;
+            // Reinicia el acarreo para el siguiente ciclo.
             acarreo = 0;
         }
-        return resultado;
+        return resultado; // Devuelve el resultado de la multiplicación.
     }
 
     //método para la suma de los arrays resultantes, controlando los acarreos
@@ -188,5 +190,4 @@ public class _10_DivideVenceras1Estatico implements AlgoritmoMultiplicacion {
         // Utiliza el constructor de BigInteger que toma una cadena como argumento
         return new BigInteger(sb.toString());
     }
-
 }

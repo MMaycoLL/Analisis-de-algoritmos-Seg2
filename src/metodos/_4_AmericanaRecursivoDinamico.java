@@ -42,11 +42,15 @@ public class _4_AmericanaRecursivoDinamico implements AlgoritmoMultiplicacion {
         multiplicacionAmericanoRecursivo(arrayList1, arrayList2, resultado, acarreo, i, j, k);
     }
 
-    private static void multiplicacionAmericanoRecursivo(ArrayList<BigInteger> arrayList1, ArrayList<BigInteger> arrayList2, ArrayList<BigInteger> resultado, BigInteger acarreo, int i, int j, int k) {
+    private static void multiplicacionAmericanoRecursivo(ArrayList<BigInteger> arrayList1, ArrayList<BigInteger> arrayList2,
+                                                         ArrayList<BigInteger> resultado, BigInteger acarreo, int i, int j, int k) {
 
-        if(i==0 && j==0) {
+        // Caso base: cuando i y j son ambos cero, la multiplicación recursiva termina
+        if (i == 0 && j == 0) {
+            // Realiza la multiplicación y suma el acarreo
             resultado.set(k, resultado.get(k).add(arrayList1.get(j).multiply(arrayList2.get(i))).add(acarreo));
 
+            // Verifica si hay un acarreo al siguiente dígito
             if (resultado.get(k).compareTo(BigInteger.TEN) >= 0) {
                 acarreo = resultado.get(k).divide(BigInteger.TEN);
                 resultado.set(k, resultado.get(k).mod(BigInteger.TEN));
@@ -54,14 +58,16 @@ public class _4_AmericanaRecursivoDinamico implements AlgoritmoMultiplicacion {
                 acarreo = BigInteger.ZERO;
             }
             k--;
+
+            // Guarda cualquier acarreo restante
             resultado.set(k, acarreo);
 
         } else if (j == 0) {
-
-            //Está en la posición j=0 e i= cualquier valor del arr1 (For anidado)
+            // Está en la posición j=0 e i= cualquier valor del arrayList1 (For anidado)
             resultado.set(k, resultado.get(k).add(arrayList1.get(j).multiply(arrayList2.get(i))).add(acarreo));
 
-            if(resultado.get(k).compareTo(BigInteger.TEN) >= 0){
+            // Verifica si hay un acarreo al siguiente dígito
+            if (resultado.get(k).compareTo(BigInteger.TEN) >= 0) {
                 acarreo = resultado.get(k).divide(BigInteger.TEN);
                 resultado.set(k, resultado.get(k).mod(BigInteger.TEN));
             } else {
@@ -69,26 +75,33 @@ public class _4_AmericanaRecursivoDinamico implements AlgoritmoMultiplicacion {
             }
             k--;
 
-
+            // Reinicia j al final del arrayList1 y decrementa i para iterar arrayList2
             resultado.set(k, acarreo);
             acarreo = BigInteger.ZERO;
             i--;
             j = arrayList1.size() - 1;
             k = resultado.size() - (arrayList2.size() - i);
-            multiplicacionAmericanoRecursivo(arrayList1,arrayList2,resultado,acarreo,i,j,k);
-        } else {
 
+            // Llama recursivamente con los nuevos índices
+            multiplicacionAmericanoRecursivo(arrayList1, arrayList2, resultado, acarreo, i, j, k);
+        } else {
+            // Realiza la multiplicación y suma el acarreo
             resultado.set(k, resultado.get(k).add(arrayList1.get(j).multiply(arrayList2.get(i))).add(acarreo));
 
-            if(resultado.get(k).compareTo(BigInteger.TEN) >= 0){
+            // Verifica si hay un acarreo al siguiente dígito
+            if (resultado.get(k).compareTo(BigInteger.TEN) >= 0) {
                 acarreo = resultado.get(k).divide(BigInteger.TEN);
                 resultado.set(k, resultado.get(k).mod(BigInteger.TEN));
             } else {
                 acarreo = BigInteger.ZERO;
             }
             k--;
+
+            // Decrementa los índices para la siguiente iteración recursiva
             j--;
-            multiplicacionAmericanoRecursivo(arrayList1,arrayList2,resultado,acarreo,i,j,k);
+
+            // Llama recursivamente con los nuevos índices
+            multiplicacionAmericanoRecursivo(arrayList1, arrayList2, resultado, acarreo, i, j, k);
 
         }
     }

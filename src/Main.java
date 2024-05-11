@@ -42,27 +42,27 @@ public class Main extends JFrame {
 
         AlgoritmoMultiplicacion algoritmo5 = new _5_InglesaIterativoEstatico();
         double tiempoAlgoritmo5 = medirTiempo(algoritmo5, arreglo1, arreglo2);
-        arregloDeTiempos[4] = new metodos.AlgoritmoTiempo("InglesaIterativoEstatico", tiempoAlgoritmo5);
+        arregloDeTiempos[4] = new metodos.AlgoritmoTiempo("IIEstatico", tiempoAlgoritmo5);
 
         AlgoritmoMultiplicacion algoritmo6 = new _6_InglesaIterativoDinamico();
         double tiempoAlgoritmo6 = medirTiempo(algoritmo6, arreglo1, arreglo2);
-        arregloDeTiempos[5] = new metodos.AlgoritmoTiempo("InglesaIterativoDinamico", tiempoAlgoritmo6);
+        arregloDeTiempos[5] = new metodos.AlgoritmoTiempo("IIDinamico", tiempoAlgoritmo6);
 
         AlgoritmoMultiplicacion algoritmo7 = new _7_InglesaRecursivoEstatico();
         double tiempoAlgoritmo7 = medirTiempo(algoritmo7, arreglo1, arreglo2);
-        arregloDeTiempos[6] = new metodos.AlgoritmoTiempo("InglesaRecursivoEstatico", tiempoAlgoritmo7);
+        arregloDeTiempos[6] = new metodos.AlgoritmoTiempo("IREstatico", tiempoAlgoritmo7);
 
         AlgoritmoMultiplicacion algoritmo8 = new _8_InglesaRecursivoDinamico();
         double tiempoAlgoritmo8 = medirTiempo(algoritmo8, arreglo1, arreglo2);
-        arregloDeTiempos[7] = new metodos.AlgoritmoTiempo("InglesaRecursivoDinamico", tiempoAlgoritmo8);
+        arregloDeTiempos[7] = new metodos.AlgoritmoTiempo("IRDinamico", tiempoAlgoritmo8);
 
         AlgoritmoMultiplicacion algoritmo9 = new _9_HinduIterativoEstatico();
         double tiempoAlgoritmo9 = medirTiempo(algoritmo9, arreglo1, arreglo2);
-        arregloDeTiempos[8] = new metodos.AlgoritmoTiempo("HinduIterativoEstatico", tiempoAlgoritmo9);
+        arregloDeTiempos[8] = new metodos.AlgoritmoTiempo("HIEstatico", tiempoAlgoritmo9);
 
         AlgoritmoMultiplicacion algoritmo10 = new _10_DivideVenceras1Estatico();
         double tiempoAlgoritmo10 = medirTiempo(algoritmo10, arreglo1, arreglo2);
-        arregloDeTiempos[9] = new metodos.AlgoritmoTiempo("DivideVenceras1Estatico", tiempoAlgoritmo10);
+        arregloDeTiempos[9] = new metodos.AlgoritmoTiempo("DiV1Estatico", tiempoAlgoritmo10);
 
 
 
